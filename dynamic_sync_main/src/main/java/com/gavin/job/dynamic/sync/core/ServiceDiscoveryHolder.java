@@ -3,8 +3,10 @@ package com.gavin.job.dynamic.sync.core;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.gavin.job.dynamic.sync.common.constant.Constants.SERVER_NOTIFY_TYPE;
 import com.gavin.job.dynamic.sync.common.constant.Constants.SERVIE_LISTEN_TYPE;
 import com.gavin.job.dynamic.sync.common.core.listener.ServiceDiscoveryListener;
+import com.gavin.job.dynamic.sync.common.core.notify.IServerNotify;
 import com.gavin.job.dynamic.sync.common.utils.log.LogUtils;
 import com.gavin.job.dynamic.sync.config.ConfigFileWrapper;
 import com.gavin.job.dynamic.sync.listener.zookeeper.ZKNodeWrapper;
@@ -16,6 +18,11 @@ public class ServiceDiscoveryHolder {
 	// class
 	// instance>
 
+	private static Map<String, IServerNotify> notifyHolder = new HashMap<String, IServerNotify>(); // <zookeeper,handler
+	// class
+	// instance>
+
+	
 	private static ServiceDiscoveryHolder instance = new ServiceDiscoveryHolder();
 
 	static {
@@ -66,11 +73,38 @@ public class ServiceDiscoveryHolder {
 			}
 
 		}
-
+		
+		if (SERVER_NOTIFY_TYPE.NGINX.equals(ConfigFileWrapper.SERVER_TYPE)) {
+			notifyHolder.put(SERVER_NOTIFY_TYPE.NGINX, ZKNodeWrapper.getInstance().getNotify());
+		}else {
+			// 类加载指定的服务发现实现类
+			Class<IServerNotify> clazz;
+			try {
+				clazz = (Class<IServerNotify>) Class
+						.forName(ConfigFileWrapper.SERVER_TYPE);
+				notifyHolder.put(ConfigFileWrapper.SERVER_TYPE, clazz.newInstance());
+				
+			} catch (ClassNotFoundException e) {
+				LogUtils.getInstance().errorSystem("Service Discovery",
+						"Can not init service discovery", e);
+				e.printStackTrace();
+			} catch (InstantiationException e) {
+				LogUtils.getInstance().errorSystem("Service Discovery",
+						"Can not init service discovery", e);
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				LogUtils.getInstance().errorSystem("Service Discovery",
+						"Can not init service discovery", e);
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public ServiceDiscoveryListener getListenerHandler(String name) {
 		return listenerHolder.get(name.trim());
 	}
 
+	public IServerNotify getServerNotify(String name) {
+		return notifyHolder.get(name.trim());
+	}
 }

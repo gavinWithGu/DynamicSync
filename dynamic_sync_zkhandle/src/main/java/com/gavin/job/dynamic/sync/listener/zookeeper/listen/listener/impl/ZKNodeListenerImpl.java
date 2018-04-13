@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.I0Itec.zkclient.ZkClient;
 
+import com.gavin.job.dynamic.sync.common.core.callback.INotifyCallback;
 import com.gavin.job.dynamic.sync.common.core.notify.IServerNotify;
 import com.gavin.job.dynamic.sync.common.utils.log.LogUtils;
 import com.gavin.job.dynamic.sync.listener.zookeeper.ZKNodeWrapper;
@@ -22,7 +23,8 @@ public class ZKNodeListenerImpl implements
 	private ZkClient zkClient = ZkClientWrapper.getInstance().getZkClient();
 
 	@Override
-	public void registerListener() {
+	public void registerListener(INotifyCallback callback) {
+		
 		for (final String path : ZkConfig.SERVICE_DISCOVERY_LISTENER_SUBPATH) {
 
 			try {
@@ -49,9 +51,8 @@ public class ZKNodeListenerImpl implements
 							GeneralPropertyPlaceholder.getInstance().updateSubNode(path, zkClient);
 						}
 
-						// Notify the Server to change configuration
-						IServerNotify notify = ZKNodeWrapper.getInstance().getNotify();
-						notify.notifyToServer();
+						callback.notifyCallback();
+						
 					} catch (Exception e) {
 						LogUtils.getInstance().errorSystem("ZKNodeListenerImpl",
 								"Update config properties error!", e);

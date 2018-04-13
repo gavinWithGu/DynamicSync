@@ -12,8 +12,9 @@
  */
 package com.gavin.job.dynamic.sync.common.utils;
 
-import java.security.MessageDigest;  
-import sun.misc.BASE64Decoder;  
+import java.security.MessageDigest;
+
+import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;  
 
 public class EncryptUtil {  

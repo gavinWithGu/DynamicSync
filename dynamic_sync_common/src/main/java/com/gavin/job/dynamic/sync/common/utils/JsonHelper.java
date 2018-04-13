@@ -3,17 +3,15 @@ package com.gavin.job.dynamic.sync.common.utils;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 
 /**

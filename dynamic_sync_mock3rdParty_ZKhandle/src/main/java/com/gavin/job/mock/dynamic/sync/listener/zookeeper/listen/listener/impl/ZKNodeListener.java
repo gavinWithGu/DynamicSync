@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.I0Itec.zkclient.ZkClient;
 
+import com.gavin.job.dynamic.sync.common.core.callback.INotifyCallback;
 import com.gavin.job.dynamic.sync.common.core.notify.IServerNotify;
 import com.gavin.job.dynamic.sync.common.utils.log.LogUtils;
 import com.gavin.job.mock.dynamic.sync.listener.zookeeper.ZKNodeWrapper;
@@ -11,8 +12,8 @@ import com.gavin.job.mock.dynamic.sync.listener.zookeeper.ZkConfig;
 import com.gavin.job.mock.dynamic.sync.listener.zookeeper.listen.listener.IZKNodeListener;
 import com.gavin.job.mock.dynamic.sync.listener.zookeeper.listen.placeholderwrapper.GeneralPropertyPlaceholder;
 import com.gavin.job.mock.dynamic.sync.listener.zookeeper.listen.subcriber.IZNodeSubscriber;
-import com.gavin.job.mock.dynamic.sync.listener.zookeeper.listen.subcriber.impl.ZkClientWrapper;
 import com.gavin.job.mock.dynamic.sync.listener.zookeeper.listen.subcriber.impl.ZNodeSubscriberImpl;
+import com.gavin.job.mock.dynamic.sync.listener.zookeeper.listen.subcriber.impl.ZkClientWrapper;
 
 public class ZKNodeListener implements
 		IZKNodeListener {
@@ -22,7 +23,7 @@ public class ZKNodeListener implements
 	private ZkClient zkClient = ZkClientWrapper.getInstance().getZkClient();
 
 	@Override
-	public void registerListener() {
+	public void registerListener(INotifyCallback callback) {
 		for (final String path : ZkConfig.SERVICE_DISCOVERY_LISTENER_SUBPATH) {
 
 			try {
