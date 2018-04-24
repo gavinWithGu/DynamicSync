@@ -9,19 +9,27 @@
 1. 第三方可以实现ServiceDiscoveryListener与IServerNotify接口，自定义服务发现与通知的逻辑
    同时将实现类配置在config.properties中，系统启动时，进行类加载，使用第三方指定的类，进行服务发现与动态更新配置文件
 
-2. 注意：实现ServiceDiscoveryListener时,需要在最后调用方法入参的回调函数\<br>  
-   void registerListener(INotifyCallback callback)\<br>  
-   ...\<br>  
-   callback.notifyCallback();\<br>  
-   ...\<br>  
+2. 注意：实现ServiceDiscoveryListener时,需要在最后调用方法入参的回调函数
+
+
+   void registerListener(INotifyCallback callback)
+
+
+   ...
+
+
+   callback.notifyCallback();
+
+
+   ...
 
 
 
 
 
 配置文件说明：
-/dynamic_sync_main/src/main/resources/config.properties\<br>  
-# \<br>  
+/dynamic_sync_main/src/main/resources/config.properties
+# 
 # Discovery Service configuration
 # 
 service.discovery.method=zookeeper                                                                               # 监听实现方式,默认zookeeper,也可以自己实现ServiceDiscoveryListener接口,定义自己的逻辑
