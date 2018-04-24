@@ -29,10 +29,10 @@
 
 配置文件说明：
 /dynamic_sync_main/src/main/resources/config.properties
-# 
+
 # Discovery Service configuration
-# 
-service.discovery.method=zookeeper                                                                               # 监听实现方式,默认zookeeper,也可以自己实现ServiceDiscoveryListener接口,定义自己的逻辑
+
+service.discovery.method=zookeeper                                                                               # 监听实现方式,默认zookeeper,也可以自己实现ServiceDiscoveryListener接口,定义自己的逻辑<\br>
 #service.discovery.method=com.gavin.job.mock.dynamic.sync.listener.zookeeper.listen.listener.impl.ZKNodeListener # 测试使用的第三方实现类全限定名
 service.discovery.host=192.168.1.107:2181,192.168.1.109:2181,192.168.1.110:2181                                  # zk服务器地址
 service.discovery.client.timeout=5000
