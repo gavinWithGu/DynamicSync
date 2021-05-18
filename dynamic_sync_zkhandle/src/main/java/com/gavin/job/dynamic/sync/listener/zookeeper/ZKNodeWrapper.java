@@ -5,6 +5,9 @@ import com.gavin.job.dynamic.sync.listener.zookeeper.listen.listener.IZKNodeList
 import com.gavin.job.dynamic.sync.listener.zookeeper.listen.listener.impl.ZKNodeListenerImpl;
 import com.gavin.job.dynamic.sync.listener.zookeeper.notify.NginxNotify;
 
+/**
+**封装zookeeper的操作wrapper
+**/
 public class ZKNodeWrapper {
 	private static IZKNodeListener listener;
 
