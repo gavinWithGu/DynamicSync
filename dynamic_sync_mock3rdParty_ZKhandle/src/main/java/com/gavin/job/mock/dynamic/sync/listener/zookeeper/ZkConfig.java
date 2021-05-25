@@ -32,7 +32,7 @@ public class ZkConfig {
 		try {
 			propsSystem.load(inSystem);
 
-			SERVICE_DISCOVERY_METHOD = propsSystem.getProperty("service.discovery.method");
+			SERVICE_DISCOVERY_METHOD = propsSystem.getProperty("service.discovery.method");  //add properties
 			
 			SERVICE_DISCOVERY_HOST = propsSystem.getProperty("service.discovery.host");
 			SERVICE_DISCOVERY_CLIENT_TIMEOUT = Integer.parseInt(propsSystem.getProperty("service.discovery.client.timeout"));
