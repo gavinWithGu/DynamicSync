@@ -52,7 +52,7 @@ public class MsgDescription {
 	}
 
 	public static String getMsgDesc(int code, Object... params) {
-		String result = "Unknown message";
+		String result = "Error: Unknown message";
 		String key = code2KeyMap.get(code);
 		if (!GeneralUtils.isNullOrZeroLenght(key)) {
 			String msg = msgProperties.getProperty(key);
@@ -66,7 +66,7 @@ public class MsgDescription {
 	}
 
 	public static String getMsgDesc(String code) {
-		String result = "Unknown message";
+		String result = "Error: Unknown message";
 		String key = code2KeyMap.get(code);
 		if (!GeneralUtils.isNullOrZeroLenght(key)) {
 			result = msgProperties.getProperty(key);
