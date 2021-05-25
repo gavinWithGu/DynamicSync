@@ -26,6 +26,7 @@ public class ServiceDiscoveryHolder {
 	private static ServiceDiscoveryHolder instance = new ServiceDiscoveryHolder();
 
 	static {
+		//执行初始化操作
 		init();
 	}
 
@@ -99,11 +100,13 @@ public class ServiceDiscoveryHolder {
 			}
 		}
 	}
-
+        
+	//获取对应的监听器
 	public ServiceDiscoveryListener getListenerHandler(String name) {
 		return listenerHolder.get(name.trim());
 	}
-
+        
+	//获取对应的服务端通知
 	public IServerNotify getServerNotify(String name) {
 		return notifyHolder.get(name.trim());
 	}
