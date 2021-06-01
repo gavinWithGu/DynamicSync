@@ -13,6 +13,8 @@ import com.gavin.job.dynamic.sync.listener.zookeeper.ZkConfig;
 import com.gavin.job.dynamic.sync.listener.zookeeper.listen.PropRepos;
 import com.gavin.job.dynamic.sync.listener.zookeeper.notify.NodeHolder;
 
+/**Zookeeper Listener for register nodes
+*/
 public class GeneralPropertyPlaceholder extends PropertyPlaceholderHelper {
 
 	private String rootNode = ZkConfig.SERVICE_DISCOVERY_LISTENER_ROOTPATH;
@@ -36,7 +38,7 @@ public class GeneralPropertyPlaceholder extends PropertyPlaceholderHelper {
 			String data = zkClient.readData(subNodePath, stat);
 			
 			int dotIndex = data.lastIndexOf(".");
-			if(dotIndex>0){
+			if(dotIndex > 0){
 				NodeHolder.getInstance().addSeed(data.substring(0, dotIndex),Long.valueOf(data.substring(dotIndex+1, data.length())));				
 			}
 		}
