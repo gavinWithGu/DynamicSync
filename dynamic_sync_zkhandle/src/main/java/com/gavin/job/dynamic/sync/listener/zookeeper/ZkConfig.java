@@ -51,7 +51,8 @@ public class ZkConfig {
 				try {
 					inSystem.close();
 				} catch (IOException e) {
-
+					LogUtils.getInstance().errorSystem("ConfigFileUtil",
+					"Error loading properties from Local file system!", ex);
 				}
 			}
 		}
